@@ -29,10 +29,12 @@ public class CategoryController {
         return "Category added successfully";
     }
 
-   /* @DeleteMapping("/api/public/categories")
-    public String deleteCategory(@RequestBody Category category) {
-        categoryService.deleteCategory(category);
-        return "Category deleted successfully";
-    } */
+    @DeleteMapping("/api/admin/categories/{categoryId}")
+    public String deleteCategory(@PathVariable Long categoryId) {
+        //Bir HTTP isteği sırasında URI'nin belirli bir bölümünden veri alınmasını sağlar.
+        String status = categoryService.deleteCategory(categoryId);
+
+        return status;
+    }
 
 }
