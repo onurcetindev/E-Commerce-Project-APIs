@@ -9,10 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class CategoryController {
 
     @Autowired
@@ -22,22 +23,22 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/api/public/categories")
+    @GetMapping("/public/categories")
     public ResponseEntity<List<Category>> getCategories() {
         List<Category> categories = categoryService.getAllCategories();
         return  new ResponseEntity<>(categories,HttpStatus.OK);
     }
 
-    @PostMapping("/api/public/categories")
+    @PostMapping("/public/categories")
     public ResponseEntity<String> createCategory(@RequestBody Category category) {
         categoryService.createCategory(category);
         return new  ResponseEntity<>("Category created", HttpStatus.CREATED);
     }
 
 
-    @DeleteMapping("/api/admin/categories/{categoryId}")
+    @DeleteMapping("/admin/categories/{categoryId}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
-        //Bir HTTP isteği sırasında URI'nin belirli bir bölümünden veri alınmasını sağlar.
+        // Path Variable bir HTTP isteği sırasında URI'nin belirli bir bölümünden veri alınmasını sağlar.
         try {
             String status = categoryService.deleteCategory(categoryId);
             return  ResponseEntity.status(HttpStatus.OK).body(status);
@@ -47,11 +48,11 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("/api/public/categories/{categoryId}")
+    @PutMapping("/public/categories/{categoryId}")
     public ResponseEntity<String> updateCategory(@RequestBody Category category, @PathVariable Long categoryId) {
         try {
             Category savedCategory = categoryService.updateCategory(category,categoryId);
-            return  new ResponseEntity<>("Category with category id : " + categoryId,HttpStatus.OK);
+            return  new ResponseEntity<>("Updated Category with category id : " + categoryId,HttpStatus.OK);
 
         }catch (ResponseStatusException e) {
             return new ResponseEntity<>(e.getReason(), e.getStatusCode());

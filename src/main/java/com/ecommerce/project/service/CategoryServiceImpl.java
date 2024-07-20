@@ -44,6 +44,8 @@ public class CategoryServiceImpl implements CategoryService {
                 categories.stream().filter(c->c.getCategoryId().equals(categoryId))
                 .findFirst();
 
+        //Optional sınıfı, null referansları daha güvenli bir şekilde yönetmek için kullanılır.
+
         if (optionalCategory.isPresent()){
             Category existingCategory = optionalCategory.get();
             existingCategory.setCategoryName(category.getCategoryName());
