@@ -1,6 +1,6 @@
 package com.ecommerce.project.controller;
 
-import com.ecommerce.project.model.Category;
+
 import com.ecommerce.project.payload.CategoryDTO;
 import com.ecommerce.project.payload.CategoryResponse;
 import com.ecommerce.project.service.CategoryService;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 
-import java.util.List;
+
 
 @RestController
 @RequestMapping("/api")
@@ -39,19 +39,19 @@ public class CategoryController {
 
 
     @DeleteMapping("/admin/categories/{categoryId}")
-    public ResponseEntity<String> deleteCategory(@PathVariable Long categoryId) {
+    public ResponseEntity<CategoryDTO> deleteCategory(@PathVariable Long categoryId) {
         // Path Variable bir HTTP isteği sırasında URI'nin belirli bir bölümünden veri alınmasını sağlar.
 
-            String status = categoryService.deleteCategory(categoryId);
-            return  ResponseEntity.status(HttpStatus.OK).body(status);
+            CategoryDTO deletedCategory = categoryService.deleteCategory(categoryId);
+            return  new ResponseEntity<>(deletedCategory, HttpStatus.OK);
 
     }
 
     @PutMapping("/public/categories/{categoryId}")
     public ResponseEntity<CategoryDTO> updateCategory(@Valid @RequestBody CategoryDTO categoryDTO, @PathVariable Long categoryId) {
 
-            CategoryDTO savedCategoryDTO = categoryService.updateCategory(categoryDTO,categoryId);
-            return  new ResponseEntity<>(categoryDTO,HttpStatus.OK);
+        CategoryDTO savedCategoryDTO = categoryService.updateCategory(categoryDTO, categoryId);
+        return new ResponseEntity<>(savedCategoryDTO, HttpStatus.OK);
     }
 
 }
