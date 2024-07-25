@@ -30,6 +30,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize){
 
+        //http://localhost:8081/api/public/categories?pageNumber=0&pageSize=10 it's a URL indexing
+
         Pageable pageDetails = PageRequest.of(pageNumber, pageSize);
         Page<Category> categoryPage = categoryRepository.findAll(pageDetails);
         List<Category> categories = categoryPage.getContent();
@@ -43,6 +45,12 @@ public class CategoryServiceImpl implements CategoryService {
 
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setContent(categoryDTOS);
+        categoryResponse.setPageNumber(categoryPage.getNumber());
+        categoryResponse.setPageSize(categoryPage.getSize());
+        categoryResponse.setTotalPages(categoryPage.getTotalPages());
+        categoryResponse.setTotalElements(categoryPage.getTotalElements());
+        categoryResponse.setLastPage(categoryPage.isLast());
+
         return categoryResponse;
     }
 
