@@ -9,4 +9,7 @@ import com.ecommerce.project.payload.ProductResponse;
 public interface ProductService {
     ProductDTO addProduct(Long categoryId, Product product);
     ProductResponse getAllProducts();
+
+    ProductResponse searchByCategory(Long categoryId);
+
 }
