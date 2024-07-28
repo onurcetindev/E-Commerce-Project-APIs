@@ -29,7 +29,7 @@ public class ProductController {
     //{categoryId} kısmı dinamik bir URL parçasıdır ve metodun parametreleri arasında @PathVariable ile alınır.
 
     @PostMapping("/admin/categories/{categoryId}/product")
-    public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO,
+    public ResponseEntity<ProductDTO> addProduct(@Valid @RequestBody ProductDTO productDTO,
                                                  @PathVariable Long categoryId)
     {
 
@@ -65,6 +65,7 @@ public class ProductController {
     public ResponseEntity<ProductDTO> updateProduct(@Valid @RequestBody ProductDTO productDTO,
                                                     @PathVariable Long productId)
     {
+
         ProductDTO updatedProductDTO = productService.updateProduct(productDTO,productId);
         return new ResponseEntity<>(updatedProductDTO, HttpStatus.OK);
 
