@@ -33,7 +33,6 @@ public class ProductController {
                                                  @PathVariable Long categoryId)
     {
 
-
         ProductDTO savedProductDTO = productService.addProduct(categoryId,productDTO);
         return new ResponseEntity<>(savedProductDTO,HttpStatus.CREATED);
     }
@@ -76,11 +75,11 @@ public class ProductController {
     }
 
     @PutMapping("/admin/products/{productId}")
-    public ResponseEntity<ProductDTO> updateProduct(@RequestBody Long productDTO,
+    public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO,
                                                     @PathVariable Long productId)
     {
 
-        ProductDTO updatedProductDTO = productService.updateProduct(productDTO,productId);
+        ProductDTO updatedProductDTO = productService.updateProduct(productId,productDTO);
         return new ResponseEntity<>(updatedProductDTO, HttpStatus.OK);
 
     }
@@ -94,8 +93,11 @@ public class ProductController {
     }
 
     @PutMapping("/products/{productId}/image")
-    public ResponseEntity<ProductDTO> updateProductImage(@PathVariable Long productId,
-                                                         @RequestParam("image") MultipartFile image) throws IOException {
+    public ResponseEntity<ProductDTO> updateProductImage(
+            @PathVariable Long productId,
+            @RequestParam("image") MultipartFile image) throws IOException
+
+    {
         ProductDTO updatedProduct =  productService.updateProductImage(productId,image);
         return new ResponseEntity<>(updatedProduct,HttpStatus.OK);
     }

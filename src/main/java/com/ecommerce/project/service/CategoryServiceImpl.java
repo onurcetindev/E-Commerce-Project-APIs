@@ -31,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryResponse getAllCategories(Integer pageNumber, Integer pageSize,String sortBy,String sortOrder){
 
-        //http://localhost:8081/api/public/categories?pageNumber=0&pageSize=10 it's a URL indexing
+        //http://localhost:8082/api/public/categories?pageNumber=0&pageSize=10 it's a URL indexing
 
         Sort sortByAndOrder = sortOrder.equalsIgnoreCase("asc")
                 ? Sort.by(sortBy).ascending()
@@ -74,8 +74,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDTO  deleteCategory(Long categoryId) {
 
-        Category category = categoryRepository.findById(categoryId).
-                orElseThrow(() -> new ResourceNotFoundException("Category","categoryId",categoryId));
+        Category category = categoryRepository.findById(categoryId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Category","categoryId",categoryId));
 
         categoryRepository.delete(category);
         return modelMapper.map(category, CategoryDTO.class);

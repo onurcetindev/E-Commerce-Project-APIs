@@ -11,6 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 public class CategoryResponse {
 
+    //CategoryResponse sınıfı, sayfalama (pagination) bilgileri ile birlikte kategori verilerini taşımak için kullanılır.
+    // Bu sınıf, bir sayfalama yanıtında döndürülen kategori verilerini ve ilgili sayfalama meta verilerini içerir.
+
     private List<CategoryDTO> content;
     private Integer pageNumber;
     private Integer pageSize;

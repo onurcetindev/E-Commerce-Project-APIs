@@ -33,4 +33,6 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    //@JoinColumn(name = "category_id"): Bu, Product tablosunda Category'yi temsil eden yabancı anahtar sütununun
+    // adını belirtir. category_id sütunu, Product tablosunda Category tablosundaki ilgili kategoriye işaret eder.
 }

@@ -23,5 +23,13 @@ public class Category {
     private String categoryName;
 
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    private List<Product> products;
+    private List<Product>products;
+    //mappedBy = "category": Bu, ilişkiyi ters tarafta (yani Product varlığında) tanımlanan
+    // alanın adını belirtir. Product varlığında category adında bir alan vardır ve
+    // bu alan Product'ın hangi Category'ye ait olduğunu gösterir.
+
+
+    //cascade = CascadeType.ALL: Bu, Category varlığı üzerindeki tüm kalıcılık (persistence) işlemlerinin
+    // (INSERT, UPDATE, DELETE) ilgili Product varlıklarına da uygulanacağını belirtir.
+    // Örneğin, bir Category silindiğinde, bu kategoriye ait tüm Product'lar da silinir.
 }
